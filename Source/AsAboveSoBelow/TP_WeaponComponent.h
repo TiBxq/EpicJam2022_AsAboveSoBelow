@@ -6,7 +6,7 @@
 #include "Components/ActorComponent.h"
 #include "TP_WeaponComponent.generated.h"
 
-class AAsAboveSoBelowCharacter;
+class AMyCharacter;
 
 UCLASS(Blueprintable, BlueprintType, ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class ASABOVESOBELOW_API UTP_WeaponComponent : public UActorComponent
@@ -35,7 +35,7 @@ public:
 
 	/** Attaches the actor to a FirstPersonCharacter */
 	UFUNCTION(BlueprintCallable, Category="Weapon")
-	void AttachWeapon(AAsAboveSoBelowCharacter* TargetCharacter);
+	void AttachWeapon(AMyCharacter* TargetCharacter);
 
 	/** Make the weapon Fire a Projectile */
 	UFUNCTION(BlueprintCallable, Category="Weapon")
@@ -49,5 +49,5 @@ protected:
 
 private:
 	/** The Character holding this weapon*/
-	AAsAboveSoBelowCharacter* Character;
+	AMyCharacter* Character;
 };
