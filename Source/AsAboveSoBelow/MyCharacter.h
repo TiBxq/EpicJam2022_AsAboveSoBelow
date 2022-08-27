@@ -14,7 +14,8 @@ UCLASS()
 class ASABOVESOBELOW_API AMyCharacter : public AFirstPersonCharacter
 {
 	GENERATED_BODY()
-	
+
+	AMyCharacter(const FObjectInitializer& ObjectInitializer);
 
 public:
 	/** Delegate to whom anyone can subscribe to receive this event */
