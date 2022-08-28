@@ -4,6 +4,7 @@
 #include "MyCharacter.h"
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
+#include "HealthComponent.h"
 
 AMyCharacter::AMyCharacter(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
 {
@@ -16,6 +17,8 @@ AMyCharacter::AMyCharacter(const FObjectInitializer& ObjectInitializer) : Super(
 	// Create a mesh component that will be used when being viewed from a '1st person' view (when controlling this pawn)
 	GetMesh()->SetRelativeRotation(FRotator(1.9f, -19.19f, 5.2f));
 	GetMesh()->SetRelativeLocation(FVector(-0.5f, -4.4f, -155.7f));
+
+	HealthComponent = CreateDefaultSubobject<UHealthComponent>(TEXT("HealthComp"));
 }
 
 void AMyCharacter::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent)
