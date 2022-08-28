@@ -7,6 +7,7 @@
 #include "HealthComponent.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnDeath);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnDamageTaken, float, Damage);
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class ASABOVESOBELOW_API UHealthComponent : public UActorComponent
@@ -36,6 +37,9 @@ protected:
 
 	UPROPERTY(BlueprintAssignable, Category = "Health")
 	FOnDeath OnDeath;
+
+	UPROPERTY(BlueprintAssignable, Category = "Health")
+	FOnDamageTaken OnDamageTaken;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	float MaxHealth = 100.f;

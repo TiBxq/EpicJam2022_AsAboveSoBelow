@@ -38,6 +38,8 @@ void UHealthComponent::TakeDamage(float Damage)
 	{
 		Health = FMath::Max(Health - Damage, 0.f);
 
+		OnDamageTaken.Broadcast(Damage);
+
 		if (Health <= 0.f)
 		{
 			OnDeath.Broadcast();
