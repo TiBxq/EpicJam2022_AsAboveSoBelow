@@ -22,8 +22,14 @@ class AAsAboveSoBelowProjectile : public AActor
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Movement, meta = (AllowPrivateAccess = "true"))
 	UProjectileMovementComponent* ProjectileMovement;
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = Damage, meta = (AllowPrivateAccess = "true"))
+	float Damage = 50.f;
+
 public:
 	AAsAboveSoBelowProjectile();
+
+	UFUNCTION(BlueprintCallable)
+	void SetDamage(float NewDamage) { Damage = NewDamage; }
 
 	/** called when projectile hits something */
 	UFUNCTION()

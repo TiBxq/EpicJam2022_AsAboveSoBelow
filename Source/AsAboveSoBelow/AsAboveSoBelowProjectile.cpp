@@ -39,18 +39,20 @@ void AAsAboveSoBelowProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* Othe
 	// Only add impulse and destroy projectile if we hit a physics
 	if ((OtherActor != nullptr) && (OtherActor != this) && (OtherComp != nullptr))
 	{
-		if (OtherComp->IsSimulatingPhysics())
-		{
-			OtherComp->AddImpulseAtLocation(GetVelocity() * 100.0f, GetActorLocation());
-		}
-
 		if (AMyCharacter* OtherCharacter = Cast<AMyCharacter>(OtherActor))
 		{
-			OtherCharacter->GetHealthComponent()->TakeDamage(50.f);
+			OtherCharacter->GetHealthComponent()->TakeDamage(Damage);
 		}
 		else if (AMyEnemy* OtherEnemy = Cast<AMyEnemy>(OtherActor))
 		{
-			OtherEnemy->GetHealthComponent()->TakeDamage(50.f);
+			OtherEnemy->GetHealthComponent()->TakeDamage(Damage);
+		}
+		else
+		{
+			if (OtherComp->IsSimulatingPhysics())
+			{
+				OtherComp->AddImpulseAtLocation(GetVelocity() * 100.0f, GetActorLocation());
+			}
 		}
 
 		Destroy();
