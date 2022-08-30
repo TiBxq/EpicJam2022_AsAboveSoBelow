@@ -6,6 +6,7 @@
 #include "HealthComponent.h"
 #include "MyCharacter.h"
 #include "MyEnemy.h"
+#include "MyGameplayGameMode.h"
 
 AAsAboveSoBelowProjectile::AAsAboveSoBelowProjectile() 
 {
@@ -39,13 +40,25 @@ void AAsAboveSoBelowProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* Othe
 	// Only add impulse and destroy projectile if we hit a physics
 	if ((OtherActor != nullptr) && (OtherActor != this) && (OtherComp != nullptr))
 	{
+		bool IsAstral = false;
+		if (AMyGameplayGameMode* MyGameMode = Cast<AMyGameplayGameMode>(GetWorld()->GetAuthGameMode()))
+		{
+			IsAstral = MyGameMode->IsInAstralWorld();
+		}
+
 		if (AMyCharacter* OtherCharacter = Cast<AMyCharacter>(OtherActor))
 		{
-			OtherCharacter->GetHealthComponent()->TakeDamage(Damage);
+			if (!IsAstral)
+			{
+				OtherCharacter->GetHealthComponent()->TakeDamage(Damage);
+			}
 		}
 		else if (AMyEnemy* OtherEnemy = Cast<AMyEnemy>(OtherActor))
 		{
-			OtherEnemy->GetHealthComponent()->TakeDamage(Damage);
+			if (!IsAstral)
+			{
+				OtherEnemy->GetHealthComponent()->TakeDamage(Damage);
+			}
 		}
 		else
 		{
